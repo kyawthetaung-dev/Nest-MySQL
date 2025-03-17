@@ -1,14 +1,16 @@
+
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TodoModule } from './todo/todo.module';
+import { Todo } from './todo/entities/todo.entity';
+import { User } from './todo/entities/user.entity';
 
 
 @Module({
   imports: [
-    TodoModule,
+    TypeOrmModule.forFeature([User]),
     ConfigModule.forRoot({
       envFilePath: '.env'
     }),
@@ -21,9 +23,11 @@ import { TodoModule } from './todo/todo.module';
       database: process.env.MYSQL_DB,
       synchronize: true,
       autoLoadEntities: true
-    })
+    }),
+
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [AppService],
 })
 export class AppModule { }

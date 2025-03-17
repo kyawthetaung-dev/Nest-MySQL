@@ -7,6 +7,9 @@ import { Todo } from './entities/todo.entity';
 
 @Injectable()
 export class TodoService {
+  getHello(): string {
+    return 'Hello World!';
+  }
   constructor(
     @InjectRepository(Todo)
     private readonly todoRepository: Repository<Todo>
