@@ -2,12 +2,16 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Headers, Put, Query 
 import { AppService } from './app.service';
 import { CreateTodoDto } from './todo/dto/create-todo.dto';
 import { UpdateTodoDto } from './todo/dto/update-todo.dto';
-@Controller('users')
+@Controller()
 export class AppController {
   constructor(private readonly userService: AppService) {}
 
-  @Get('raw')
+  @Get('users')
   async getAllUsersRaw() {
     return await this.userService.getAllUsersRaw();
+  }
+  @Get('persons')
+  async getAllPerson(@Param('id') id: string) {
+    return await this.userService.getAllPerson(id);
   }
 }

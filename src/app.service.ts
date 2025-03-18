@@ -14,4 +14,10 @@ export class AppService {
     async getAllUsersRaw(): Promise<User[]> {
       return await this.dataSource.query(`SELECT * FROM tbl_user`);
     }
+    async getAllPerson(id: string): Promise<{ full_name: string }[]> {
+      return await this.dataSource.query(
+        // `SELECT full_name FROM tbl_person WHERE id = ?`,[id]
+        `SELECT full_name,qualification FROM tbl_person`,
+      );
+    }
  }
